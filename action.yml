@@ -7,12 +7,18 @@ inputs:
 runs:
   using: "composite"
   steps:
-  - run: python -m pip install --upgrade pip setuptools wheel delvewheel
+  - name: Update python tools
+    run: python -m pip install --upgrade pip setuptools wheel delvewheel
+    shell: bash
+
   - uses: actions/checkout@v2
-  - run: |
+
+  - name: Build and fix the wheel
+    shell: bash
+    run: |
       python -m pip wheel --no-deps . -w wheelhouse
       delvewheel repair -w dist -v wheelhouse/*.whl
-    shell: bash
+
   - uses: actions/upload-artifact@v2
     with:
       name: ${{ inputs.name }}
