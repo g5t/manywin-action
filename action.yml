@@ -16,7 +16,7 @@ runs:
   - name: Build and fix the wheel
     shell: bash
     run: |
-      python -m pip wheel --no-deps . -w wheelhouse
+      python -m pip wheel --no-deps -w wheelhouse --no-build-isolation .
       delvewheel repair -w dist -v wheelhouse/*.whl
 
   - uses: actions/upload-artifact@v2
