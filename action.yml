@@ -4,11 +4,15 @@ inputs:
   name:
     description: "The artifact name for in-action storage"
     required: true
+  extra:
+    description: "Extra python packages required for building the wheel"
+    required: false
+    default:
 runs:
   using: "composite"
   steps:
   - name: Update python tools
-    run: python -m pip install --upgrade pip setuptools wheel delvewheel
+    run: python -m pip install --upgrade pip setuptools wheel delvewheel ${{ inputs.extra }}
     shell: bash
 
   - uses: actions/checkout@v2
