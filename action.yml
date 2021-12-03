@@ -12,10 +12,12 @@ runs:
   using: "composite"
   steps:
   - name: Update python tools
-    run: python -m pip install --upgrade pip setuptools wheel delvewheel ${{ inputs.extra }}
+    run: python -m pip install --upgrade pip setuptools setuptools_scm wheel delvewheel ${{ inputs.extra }}
     shell: bash
 
   - uses: actions/checkout@v2
+    with:
+      fetch-depth: 0
 
   - name: Build and fix the wheel
     shell: bash
